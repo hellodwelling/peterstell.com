@@ -171,9 +171,10 @@
         contactChatOpen: false,
         active: 0,
         showAnnouncement: false,
-        customNavTransparent: false,
+        customNavTransparent:  false ,
         showMessage: false,
-        navbarHeight: ''
+        navbarHeight: '',
+        calculateTopMargin: true,
     }"
     x-effect="if (contactChatOpen === true) setTimeout(() => showMessage = true, 300)"
     :style="{ paddingTop: navbarHeight }"
@@ -211,7 +212,10 @@
         const root = document.querySelector(':root');
 
         const observer = new ResizeObserver(() => {
-            navbarHeight = $refs.navbar.offsetHeight - (customNavTransparent ? $refs.nav_menu.offsetHeight : 0) + 'px';
+            navbarHeight = calculateTopMargin ? 
+                $refs.navbar.offsetHeight + 'px' :
+                $refs.navbar.offsetHeight - (customNavTransparent ? $refs.nav_menu.offsetHeight : 0) + 'px';
+               
             root.style.setProperty('--navbarHeight', navbarHeight);
         });
         observer.observe($refs.navbar);
@@ -1099,345 +1103,373 @@
 >
     <ul role="list" class="space-y-12 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 sm:space-y-0 lg:grid-cols-3 lg:gap-x-8">
         
-            <li x-cloak x-data="{ shown: false }" x-intersect.full="shown = true" class=" block ">
-                <div x-show="shown" x-transition:enter="transition duration-1000" x-transition:enter-start="transform translate-y-20" x-transition:enter-end="transform translate-y-0">
-                    <button
-                        @click="activeImage = 0; galleryModalOpen = true"
-                        class="photo-tile block w-full h-full text-left rounded focus:outline-none focus-visible:ring focus:ring-0 focus:ring-offset-0"
-                    >
-                        
-                            <div class="aspect-w-3 aspect-h-2">
-                                
+            
+                <li x-cloak x-data="{ shown: false }" x-intersect.full="shown = true">
+                    <div x-show="shown" x-transition:enter="transition duration-1000" x-transition:enter-start="transform translate-y-20" x-transition:enter-end="transform translate-y-0">
+                        <button
+                            @click="activeImage = 0; galleryModalOpen = true"
+                            class="photo-tile block w-full h-full text-left rounded focus:outline-none focus-visible:ring focus:ring-0 focus:ring-offset-0"
+                        >
+                            
+                                <div class="aspect-w-3 aspect-h-2">
                                     
-                                        <img class="object-cover rounded-md shadow-lg hover:scale-110 transition duration-300 ease-in-out" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/500x500/filters:strip_exif()/filters:no_upscale()/media/0938fa93-e9dd-44d4-993e-18e7f6984cbd.png" alt="Our Past Work for Peterstell Junk and Moving Company in Gwynn Oak, MD" loading="lazy" decoding="async"/>
+                                        
+                                            <img class="object-cover rounded-md shadow-lg hover:scale-110 transition duration-300 ease-in-out" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/500x500/filters:strip_exif()/filters:no_upscale()/media/0938fa93-e9dd-44d4-993e-18e7f6984cbd.png" alt="Our Past Work for Peterstell Junk and Moving Company in Gwynn Oak, MD" loading="lazy" decoding="async"/>
+                                        
                                     
-                                
-                            </div>
+                                </div>
 
-                            <div class="space-y-1 text-lg font-medium leading-6">
-                                <p class="line-clamp-3"></p>
-                                <h3 class="text-primary"></h3>
-                            </div>
-                        
-                    </button>
-                </div>
-            </li>
+                                <div class="space-y-1 text-lg font-medium leading-6">
+                                    <p class="line-clamp-3"></p>
+                                    <h3 class="text-primary"></h3>
+                                </div>
+                            
+                        </button>
+                    </div>
+                </li>
+            
         
-            <li x-cloak x-data="{ shown: false }" x-intersect.full="shown = true" class=" block ">
-                <div x-show="shown" x-transition:enter="transition duration-1000" x-transition:enter-start="transform translate-y-20" x-transition:enter-end="transform translate-y-0">
-                    <button
-                        @click="activeImage = 1; galleryModalOpen = true"
-                        class="photo-tile block w-full h-full text-left rounded focus:outline-none focus-visible:ring focus:ring-0 focus:ring-offset-0"
-                    >
-                        
-                            <div class="aspect-w-3 aspect-h-2">
-                                
+            
+                <li x-cloak x-data="{ shown: false }" x-intersect.full="shown = true">
+                    <div x-show="shown" x-transition:enter="transition duration-1000" x-transition:enter-start="transform translate-y-20" x-transition:enter-end="transform translate-y-0">
+                        <button
+                            @click="activeImage = 1; galleryModalOpen = true"
+                            class="photo-tile block w-full h-full text-left rounded focus:outline-none focus-visible:ring focus:ring-0 focus:ring-offset-0"
+                        >
+                            
+                                <div class="aspect-w-3 aspect-h-2">
                                     
-                                        <img class="object-cover rounded-md shadow-lg hover:scale-110 transition duration-300 ease-in-out" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/500x500/filters:strip_exif()/filters:no_upscale()/media/09fc607c-247f-4c7c-9da9-ce2aa04cd3db.png" alt="Our Past Work for Peterstell Junk and Moving Company in Gwynn Oak, MD" loading="lazy" decoding="async"/>
+                                        
+                                            <img class="object-cover rounded-md shadow-lg hover:scale-110 transition duration-300 ease-in-out" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/500x500/filters:strip_exif()/filters:no_upscale()/media/09fc607c-247f-4c7c-9da9-ce2aa04cd3db.png" alt="Our Past Work for Peterstell Junk and Moving Company in Gwynn Oak, MD" loading="lazy" decoding="async"/>
+                                        
                                     
-                                
-                            </div>
+                                </div>
 
-                            <div class="space-y-1 text-lg font-medium leading-6">
-                                <p class="line-clamp-3"></p>
-                                <h3 class="text-primary"></h3>
-                            </div>
-                        
-                    </button>
-                </div>
-            </li>
+                                <div class="space-y-1 text-lg font-medium leading-6">
+                                    <p class="line-clamp-3"></p>
+                                    <h3 class="text-primary"></h3>
+                                </div>
+                            
+                        </button>
+                    </div>
+                </li>
+            
         
-            <li x-cloak x-data="{ shown: false }" x-intersect.full="shown = true" class=" block ">
-                <div x-show="shown" x-transition:enter="transition duration-1000" x-transition:enter-start="transform translate-y-20" x-transition:enter-end="transform translate-y-0">
-                    <button
-                        @click="activeImage = 2; galleryModalOpen = true"
-                        class="photo-tile block w-full h-full text-left rounded focus:outline-none focus-visible:ring focus:ring-0 focus:ring-offset-0"
-                    >
-                        
-                            <div class="aspect-w-3 aspect-h-2">
-                                
+            
+                <li x-cloak x-data="{ shown: false }" x-intersect.full="shown = true">
+                    <div x-show="shown" x-transition:enter="transition duration-1000" x-transition:enter-start="transform translate-y-20" x-transition:enter-end="transform translate-y-0">
+                        <button
+                            @click="activeImage = 2; galleryModalOpen = true"
+                            class="photo-tile block w-full h-full text-left rounded focus:outline-none focus-visible:ring focus:ring-0 focus:ring-offset-0"
+                        >
+                            
+                                <div class="aspect-w-3 aspect-h-2">
                                     
-                                        <img class="object-cover rounded-md shadow-lg hover:scale-110 transition duration-300 ease-in-out" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/500x500/filters:strip_exif()/filters:no_upscale()/media/f24a3054-8feb-4a3c-994e-409ded0b251d.jpeg" alt="Our Past Work for Peterstell Junk and Moving Company in Gwynn Oak, MD" loading="lazy" decoding="async"/>
+                                        
+                                            <img class="object-cover rounded-md shadow-lg hover:scale-110 transition duration-300 ease-in-out" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/500x500/filters:strip_exif()/filters:no_upscale()/media/f24a3054-8feb-4a3c-994e-409ded0b251d.jpeg" alt="Our Past Work for Peterstell Junk and Moving Company in Gwynn Oak, MD" loading="lazy" decoding="async"/>
+                                        
                                     
-                                
-                            </div>
+                                </div>
 
-                            <div class="space-y-1 text-lg font-medium leading-6">
-                                <p class="line-clamp-3"></p>
-                                <h3 class="text-primary"></h3>
-                            </div>
-                        
-                    </button>
-                </div>
-            </li>
+                                <div class="space-y-1 text-lg font-medium leading-6">
+                                    <p class="line-clamp-3"></p>
+                                    <h3 class="text-primary"></h3>
+                                </div>
+                            
+                        </button>
+                    </div>
+                </li>
+            
         
-            <li x-cloak x-data="{ shown: false }" x-intersect.full="shown = true" class=" block ">
-                <div x-show="shown" x-transition:enter="transition duration-1000" x-transition:enter-start="transform translate-y-20" x-transition:enter-end="transform translate-y-0">
-                    <button
-                        @click="activeImage = 3; galleryModalOpen = true"
-                        class="photo-tile block w-full h-full text-left rounded focus:outline-none focus-visible:ring focus:ring-0 focus:ring-offset-0"
-                    >
-                        
-                            <div class="aspect-w-3 aspect-h-2">
-                                
+            
+                <li x-cloak x-data="{ shown: false }" x-intersect.full="shown = true">
+                    <div x-show="shown" x-transition:enter="transition duration-1000" x-transition:enter-start="transform translate-y-20" x-transition:enter-end="transform translate-y-0">
+                        <button
+                            @click="activeImage = 3; galleryModalOpen = true"
+                            class="photo-tile block w-full h-full text-left rounded focus:outline-none focus-visible:ring focus:ring-0 focus:ring-offset-0"
+                        >
+                            
+                                <div class="aspect-w-3 aspect-h-2">
                                     
-                                        <img class="object-cover rounded-md shadow-lg hover:scale-110 transition duration-300 ease-in-out" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/500x500/filters:strip_exif()/filters:no_upscale()/media/7a3ef460-60d2-471f-ba28-641976d8203f.png" alt="Our Past Work for Peterstell Junk and Moving Company in Gwynn Oak, MD" loading="lazy" decoding="async"/>
+                                        
+                                            <img class="object-cover rounded-md shadow-lg hover:scale-110 transition duration-300 ease-in-out" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/500x500/filters:strip_exif()/filters:no_upscale()/media/7a3ef460-60d2-471f-ba28-641976d8203f.png" alt="Our Past Work for Peterstell Junk and Moving Company in Gwynn Oak, MD" loading="lazy" decoding="async"/>
+                                        
                                     
-                                
-                            </div>
+                                </div>
 
-                            <div class="space-y-1 text-lg font-medium leading-6">
-                                <p class="line-clamp-3"></p>
-                                <h3 class="text-primary"></h3>
-                            </div>
-                        
-                    </button>
-                </div>
-            </li>
+                                <div class="space-y-1 text-lg font-medium leading-6">
+                                    <p class="line-clamp-3"></p>
+                                    <h3 class="text-primary"></h3>
+                                </div>
+                            
+                        </button>
+                    </div>
+                </li>
+            
         
-            <li x-cloak x-data="{ shown: false }" x-intersect.full="shown = true" class=" block ">
-                <div x-show="shown" x-transition:enter="transition duration-1000" x-transition:enter-start="transform translate-y-20" x-transition:enter-end="transform translate-y-0">
-                    <button
-                        @click="activeImage = 4; galleryModalOpen = true"
-                        class="photo-tile block w-full h-full text-left rounded focus:outline-none focus-visible:ring focus:ring-0 focus:ring-offset-0"
-                    >
-                        
-                            <div class="aspect-w-3 aspect-h-2">
-                                
+            
+                <li x-cloak x-data="{ shown: false }" x-intersect.full="shown = true">
+                    <div x-show="shown" x-transition:enter="transition duration-1000" x-transition:enter-start="transform translate-y-20" x-transition:enter-end="transform translate-y-0">
+                        <button
+                            @click="activeImage = 4; galleryModalOpen = true"
+                            class="photo-tile block w-full h-full text-left rounded focus:outline-none focus-visible:ring focus:ring-0 focus:ring-offset-0"
+                        >
+                            
+                                <div class="aspect-w-3 aspect-h-2">
                                     
-                                        <img class="object-cover rounded-md shadow-lg hover:scale-110 transition duration-300 ease-in-out" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/500x500/filters:strip_exif()/filters:no_upscale()/media/9d54cc7d-d95e-4576-a71d-e5c622aa4450.jpeg" alt="Our Past Work for Peterstell Junk and Moving Company in Gwynn Oak, MD" loading="lazy" decoding="async"/>
+                                        
+                                            <img class="object-cover rounded-md shadow-lg hover:scale-110 transition duration-300 ease-in-out" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/500x500/filters:strip_exif()/filters:no_upscale()/media/9d54cc7d-d95e-4576-a71d-e5c622aa4450.jpeg" alt="Our Past Work for Peterstell Junk and Moving Company in Gwynn Oak, MD" loading="lazy" decoding="async"/>
+                                        
                                     
-                                
-                            </div>
+                                </div>
 
-                            <div class="space-y-1 text-lg font-medium leading-6">
-                                <p class="line-clamp-3"></p>
-                                <h3 class="text-primary"></h3>
-                            </div>
-                        
-                    </button>
-                </div>
-            </li>
+                                <div class="space-y-1 text-lg font-medium leading-6">
+                                    <p class="line-clamp-3"></p>
+                                    <h3 class="text-primary"></h3>
+                                </div>
+                            
+                        </button>
+                    </div>
+                </li>
+            
         
-            <li x-cloak x-data="{ shown: false }" x-intersect.full="shown = true" class=" block ">
-                <div x-show="shown" x-transition:enter="transition duration-1000" x-transition:enter-start="transform translate-y-20" x-transition:enter-end="transform translate-y-0">
-                    <button
-                        @click="activeImage = 5; galleryModalOpen = true"
-                        class="photo-tile block w-full h-full text-left rounded focus:outline-none focus-visible:ring focus:ring-0 focus:ring-offset-0"
-                    >
-                        
-                            <div class="aspect-w-3 aspect-h-2">
-                                
-                                    <video class="lazy rounded shadow-md object-cover w-full h-full" preload="none" autoplay loop playsinline controls muted>
-                                        <source data-src="https://landing-page-app-hero-images.s3.amazonaws.com/media/81d7f057-bebe-4411-a5ee-597a44358a10.mp4#t=0.5">
-                                        Your browser does not support the video tag.
-                                    </video>
-                                
-                            </div>
+            
+                <li x-cloak x-data="{ shown: false }" x-intersect.full="shown = true">
+                    <div x-show="shown" x-transition:enter="transition duration-1000" x-transition:enter-start="transform translate-y-20" x-transition:enter-end="transform translate-y-0">
+                        <button
+                            @click="activeImage = 5; galleryModalOpen = true"
+                            class="photo-tile block w-full h-full text-left rounded focus:outline-none focus-visible:ring focus:ring-0 focus:ring-offset-0"
+                        >
+                            
+                                <div class="aspect-w-3 aspect-h-2">
+                                    
+                                        <video class="lazy rounded shadow-md object-cover w-full h-full" preload="none" autoplay loop playsinline controls muted>
+                                            <source data-src="https://landing-page-app-hero-images.s3.amazonaws.com/media/81d7f057-bebe-4411-a5ee-597a44358a10.mp4#t=0.5">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    
+                                </div>
 
-                            <div class="space-y-1 text-lg font-medium leading-6">
-                                <p class="line-clamp-3"></p>
-                                <h3 class="text-primary"></h3>
-                            </div>
-                        
-                    </button>
-                </div>
-            </li>
+                                <div class="space-y-1 text-lg font-medium leading-6">
+                                    <p class="line-clamp-3"></p>
+                                    <h3 class="text-primary"></h3>
+                                </div>
+                            
+                        </button>
+                    </div>
+                </li>
+            
         
-            <li x-cloak x-data="{ shown: false }" x-intersect.full="shown = true" class=" block ">
-                <div x-show="shown" x-transition:enter="transition duration-1000" x-transition:enter-start="transform translate-y-20" x-transition:enter-end="transform translate-y-0">
-                    <button
-                        @click="activeImage = 6; galleryModalOpen = true"
-                        class="photo-tile block w-full h-full text-left rounded focus:outline-none focus-visible:ring focus:ring-0 focus:ring-offset-0"
-                    >
-                        
-                            <div class="aspect-w-3 aspect-h-2">
-                                
+            
+                <li x-cloak x-data="{ shown: false }" x-intersect.full="shown = true">
+                    <div x-show="shown" x-transition:enter="transition duration-1000" x-transition:enter-start="transform translate-y-20" x-transition:enter-end="transform translate-y-0">
+                        <button
+                            @click="activeImage = 6; galleryModalOpen = true"
+                            class="photo-tile block w-full h-full text-left rounded focus:outline-none focus-visible:ring focus:ring-0 focus:ring-offset-0"
+                        >
+                            
+                                <div class="aspect-w-3 aspect-h-2">
                                     
-                                        <img class="object-cover rounded-md shadow-lg hover:scale-110 transition duration-300 ease-in-out" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/500x500/filters:strip_exif()/filters:no_upscale()/media/62c39437-808f-4194-96b8-3af23bd9c0ff.jpeg" alt="Our Past Work for Peterstell Junk and Moving Company in Gwynn Oak, MD" loading="lazy" decoding="async"/>
+                                        
+                                            <img class="object-cover rounded-md shadow-lg hover:scale-110 transition duration-300 ease-in-out" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/500x500/filters:strip_exif()/filters:no_upscale()/media/62c39437-808f-4194-96b8-3af23bd9c0ff.jpeg" alt="Our Past Work for Peterstell Junk and Moving Company in Gwynn Oak, MD" loading="lazy" decoding="async"/>
+                                        
                                     
-                                
-                            </div>
+                                </div>
 
-                            <div class="space-y-1 text-lg font-medium leading-6">
-                                <p class="line-clamp-3"></p>
-                                <h3 class="text-primary"></h3>
-                            </div>
-                        
-                    </button>
-                </div>
-            </li>
+                                <div class="space-y-1 text-lg font-medium leading-6">
+                                    <p class="line-clamp-3"></p>
+                                    <h3 class="text-primary"></h3>
+                                </div>
+                            
+                        </button>
+                    </div>
+                </li>
+            
         
-            <li x-cloak x-data="{ shown: false }" x-intersect.full="shown = true" class=" block ">
-                <div x-show="shown" x-transition:enter="transition duration-1000" x-transition:enter-start="transform translate-y-20" x-transition:enter-end="transform translate-y-0">
-                    <button
-                        @click="activeImage = 7; galleryModalOpen = true"
-                        class="photo-tile block w-full h-full text-left rounded focus:outline-none focus-visible:ring focus:ring-0 focus:ring-offset-0"
-                    >
-                        
-                            <div class="aspect-w-3 aspect-h-2">
-                                
+            
+                <li x-cloak x-data="{ shown: false }" x-intersect.full="shown = true">
+                    <div x-show="shown" x-transition:enter="transition duration-1000" x-transition:enter-start="transform translate-y-20" x-transition:enter-end="transform translate-y-0">
+                        <button
+                            @click="activeImage = 7; galleryModalOpen = true"
+                            class="photo-tile block w-full h-full text-left rounded focus:outline-none focus-visible:ring focus:ring-0 focus:ring-offset-0"
+                        >
+                            
+                                <div class="aspect-w-3 aspect-h-2">
                                     
-                                        <img class="object-cover rounded-md shadow-lg hover:scale-110 transition duration-300 ease-in-out" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/500x500/filters:strip_exif()/filters:no_upscale()/media/6a2fb32c-609d-49ce-b214-134b602b2571.jpeg" alt="Our Past Work for Peterstell Junk and Moving Company in Gwynn Oak, MD" loading="lazy" decoding="async"/>
+                                        
+                                            <img class="object-cover rounded-md shadow-lg hover:scale-110 transition duration-300 ease-in-out" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/500x500/filters:strip_exif()/filters:no_upscale()/media/6a2fb32c-609d-49ce-b214-134b602b2571.jpeg" alt="Our Past Work for Peterstell Junk and Moving Company in Gwynn Oak, MD" loading="lazy" decoding="async"/>
+                                        
                                     
-                                
-                            </div>
+                                </div>
 
-                            <div class="space-y-1 text-lg font-medium leading-6">
-                                <p class="line-clamp-3"></p>
-                                <h3 class="text-primary"></h3>
-                            </div>
-                        
-                    </button>
-                </div>
-            </li>
+                                <div class="space-y-1 text-lg font-medium leading-6">
+                                    <p class="line-clamp-3"></p>
+                                    <h3 class="text-primary"></h3>
+                                </div>
+                            
+                        </button>
+                    </div>
+                </li>
+            
         
-            <li x-cloak x-data="{ shown: false }" x-intersect.full="shown = true" class=" block ">
-                <div x-show="shown" x-transition:enter="transition duration-1000" x-transition:enter-start="transform translate-y-20" x-transition:enter-end="transform translate-y-0">
-                    <button
-                        @click="activeImage = 8; galleryModalOpen = true"
-                        class="photo-tile block w-full h-full text-left rounded focus:outline-none focus-visible:ring focus:ring-0 focus:ring-offset-0"
-                    >
-                        
-                            <div class="aspect-w-3 aspect-h-2">
-                                
-                                    <video class="lazy rounded shadow-md object-cover w-full h-full" preload="none" autoplay loop playsinline controls muted>
-                                        <source data-src="https://landing-page-app-hero-images.s3.amazonaws.com/media/76e7000e-bde7-4f74-bd48-f760dcf40ec2.mp4#t=0.5">
-                                        Your browser does not support the video tag.
-                                    </video>
-                                
-                            </div>
+            
+                <li x-cloak x-data="{ shown: false }" x-intersect.full="shown = true">
+                    <div x-show="shown" x-transition:enter="transition duration-1000" x-transition:enter-start="transform translate-y-20" x-transition:enter-end="transform translate-y-0">
+                        <button
+                            @click="activeImage = 8; galleryModalOpen = true"
+                            class="photo-tile block w-full h-full text-left rounded focus:outline-none focus-visible:ring focus:ring-0 focus:ring-offset-0"
+                        >
+                            
+                                <div class="aspect-w-3 aspect-h-2">
+                                    
+                                        <video class="lazy rounded shadow-md object-cover w-full h-full" preload="none" autoplay loop playsinline controls muted>
+                                            <source data-src="https://landing-page-app-hero-images.s3.amazonaws.com/media/76e7000e-bde7-4f74-bd48-f760dcf40ec2.mp4#t=0.5">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    
+                                </div>
 
-                            <div class="space-y-1 text-lg font-medium leading-6">
-                                <p class="line-clamp-3"></p>
-                                <h3 class="text-primary"></h3>
-                            </div>
-                        
-                    </button>
-                </div>
-            </li>
+                                <div class="space-y-1 text-lg font-medium leading-6">
+                                    <p class="line-clamp-3"></p>
+                                    <h3 class="text-primary"></h3>
+                                </div>
+                            
+                        </button>
+                    </div>
+                </li>
+            
         
-            <li x-cloak x-data="{ shown: false }" x-intersect.full="shown = true" class=" block ">
-                <div x-show="shown" x-transition:enter="transition duration-1000" x-transition:enter-start="transform translate-y-20" x-transition:enter-end="transform translate-y-0">
-                    <button
-                        @click="activeImage = 9; galleryModalOpen = true"
-                        class="photo-tile block w-full h-full text-left rounded focus:outline-none focus-visible:ring focus:ring-0 focus:ring-offset-0"
-                    >
-                        
-                            <div class="aspect-w-3 aspect-h-2">
-                                
-                                    <video class="lazy rounded shadow-md object-cover w-full h-full" preload="none" autoplay loop playsinline controls muted>
-                                        <source data-src="https://landing-page-app-hero-images.s3.amazonaws.com/media/c18c2293-b8ad-4c8e-a1b8-3b1607f64be0.mp4#t=0.5">
-                                        Your browser does not support the video tag.
-                                    </video>
-                                
-                            </div>
+            
+                <li x-cloak x-data="{ shown: false }" x-intersect.full="shown = true">
+                    <div x-show="shown" x-transition:enter="transition duration-1000" x-transition:enter-start="transform translate-y-20" x-transition:enter-end="transform translate-y-0">
+                        <button
+                            @click="activeImage = 9; galleryModalOpen = true"
+                            class="photo-tile block w-full h-full text-left rounded focus:outline-none focus-visible:ring focus:ring-0 focus:ring-offset-0"
+                        >
+                            
+                                <div class="aspect-w-3 aspect-h-2">
+                                    
+                                        <video class="lazy rounded shadow-md object-cover w-full h-full" preload="none" autoplay loop playsinline controls muted>
+                                            <source data-src="https://landing-page-app-hero-images.s3.amazonaws.com/media/c18c2293-b8ad-4c8e-a1b8-3b1607f64be0.mp4#t=0.5">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    
+                                </div>
 
-                            <div class="space-y-1 text-lg font-medium leading-6">
-                                <p class="line-clamp-3"></p>
-                                <h3 class="text-primary"></h3>
-                            </div>
-                        
-                    </button>
-                </div>
-            </li>
+                                <div class="space-y-1 text-lg font-medium leading-6">
+                                    <p class="line-clamp-3"></p>
+                                    <h3 class="text-primary"></h3>
+                                </div>
+                            
+                        </button>
+                    </div>
+                </li>
+            
         
-            <li x-cloak x-data="{ shown: false }" x-intersect.full="shown = true" class=" block ">
-                <div x-show="shown" x-transition:enter="transition duration-1000" x-transition:enter-start="transform translate-y-20" x-transition:enter-end="transform translate-y-0">
-                    <button
-                        @click="activeImage = 10; galleryModalOpen = true"
-                        class="photo-tile block w-full h-full text-left rounded focus:outline-none focus-visible:ring focus:ring-0 focus:ring-offset-0"
-                    >
-                        
-                            <div class="aspect-w-3 aspect-h-2">
-                                
-                                    <video class="lazy rounded shadow-md object-cover w-full h-full" preload="none" autoplay loop playsinline controls muted>
-                                        <source data-src="https://landing-page-app-hero-images.s3.amazonaws.com/media/aab03207-dfc3-47b7-a005-93eba43b572e.mp4#t=0.5">
-                                        Your browser does not support the video tag.
-                                    </video>
-                                
-                            </div>
+            
+                <li x-cloak x-data="{ shown: false }" x-intersect.full="shown = true">
+                    <div x-show="shown" x-transition:enter="transition duration-1000" x-transition:enter-start="transform translate-y-20" x-transition:enter-end="transform translate-y-0">
+                        <button
+                            @click="activeImage = 10; galleryModalOpen = true"
+                            class="photo-tile block w-full h-full text-left rounded focus:outline-none focus-visible:ring focus:ring-0 focus:ring-offset-0"
+                        >
+                            
+                                <div class="aspect-w-3 aspect-h-2">
+                                    
+                                        <video class="lazy rounded shadow-md object-cover w-full h-full" preload="none" autoplay loop playsinline controls muted>
+                                            <source data-src="https://landing-page-app-hero-images.s3.amazonaws.com/media/aab03207-dfc3-47b7-a005-93eba43b572e.mp4#t=0.5">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    
+                                </div>
 
-                            <div class="space-y-1 text-lg font-medium leading-6">
-                                <p class="line-clamp-3"></p>
-                                <h3 class="text-primary"></h3>
-                            </div>
-                        
-                    </button>
-                </div>
-            </li>
+                                <div class="space-y-1 text-lg font-medium leading-6">
+                                    <p class="line-clamp-3"></p>
+                                    <h3 class="text-primary"></h3>
+                                </div>
+                            
+                        </button>
+                    </div>
+                </li>
+            
         
-            <li x-cloak x-data="{ shown: false }" x-intersect.full="shown = true" class=" block ">
-                <div x-show="shown" x-transition:enter="transition duration-1000" x-transition:enter-start="transform translate-y-20" x-transition:enter-end="transform translate-y-0">
-                    <button
-                        @click="activeImage = 11; galleryModalOpen = true"
-                        class="photo-tile block w-full h-full text-left rounded focus:outline-none focus-visible:ring focus:ring-0 focus:ring-offset-0"
-                    >
-                        
-                            <div class="aspect-w-3 aspect-h-2">
-                                
+            
+                <li x-cloak x-data="{ shown: false }" x-intersect.full="shown = true">
+                    <div x-show="shown" x-transition:enter="transition duration-1000" x-transition:enter-start="transform translate-y-20" x-transition:enter-end="transform translate-y-0">
+                        <button
+                            @click="activeImage = 11; galleryModalOpen = true"
+                            class="photo-tile block w-full h-full text-left rounded focus:outline-none focus-visible:ring focus:ring-0 focus:ring-offset-0"
+                        >
+                            
+                                <div class="aspect-w-3 aspect-h-2">
                                     
-                                        <img class="object-cover rounded-md shadow-lg hover:scale-110 transition duration-300 ease-in-out" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/500x500/filters:strip_exif()/filters:no_upscale()/media/80b70fac-c8ba-4cd7-865d-40f4aff3b3dc.png" alt="Our Past Work for Peterstell Junk and Moving Company in Gwynn Oak, MD" loading="lazy" decoding="async"/>
+                                        
+                                            <img class="object-cover rounded-md shadow-lg hover:scale-110 transition duration-300 ease-in-out" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/500x500/filters:strip_exif()/filters:no_upscale()/media/80b70fac-c8ba-4cd7-865d-40f4aff3b3dc.png" alt="Our Past Work for Peterstell Junk and Moving Company in Gwynn Oak, MD" loading="lazy" decoding="async"/>
+                                        
                                     
-                                
-                            </div>
+                                </div>
 
-                            <div class="space-y-1 text-lg font-medium leading-6">
-                                <p class="line-clamp-3"></p>
-                                <h3 class="text-primary"></h3>
-                            </div>
-                        
-                    </button>
-                </div>
-            </li>
+                                <div class="space-y-1 text-lg font-medium leading-6">
+                                    <p class="line-clamp-3"></p>
+                                    <h3 class="text-primary"></h3>
+                                </div>
+                            
+                        </button>
+                    </div>
+                </li>
+            
         
-            <li x-cloak x-data="{ shown: false }" x-intersect.full="shown = true" class=" block ">
-                <div x-show="shown" x-transition:enter="transition duration-1000" x-transition:enter-start="transform translate-y-20" x-transition:enter-end="transform translate-y-0">
-                    <button
-                        @click="activeImage = 12; galleryModalOpen = true"
-                        class="photo-tile block w-full h-full text-left rounded focus:outline-none focus-visible:ring focus:ring-0 focus:ring-offset-0"
-                    >
-                        
-                            <div class="aspect-w-3 aspect-h-2">
-                                
+            
+                <li x-cloak x-data="{ shown: false }" x-intersect.full="shown = true">
+                    <div x-show="shown" x-transition:enter="transition duration-1000" x-transition:enter-start="transform translate-y-20" x-transition:enter-end="transform translate-y-0">
+                        <button
+                            @click="activeImage = 12; galleryModalOpen = true"
+                            class="photo-tile block w-full h-full text-left rounded focus:outline-none focus-visible:ring focus:ring-0 focus:ring-offset-0"
+                        >
+                            
+                                <div class="aspect-w-3 aspect-h-2">
                                     
-                                        <img class="object-cover rounded-md shadow-lg hover:scale-110 transition duration-300 ease-in-out" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/500x500/filters:strip_exif()/filters:no_upscale()/media/f6a84425-5181-4c48-a92c-2b64c00369a9.png" alt="Our Past Work for Peterstell Junk and Moving Company in Gwynn Oak, MD" loading="lazy" decoding="async"/>
+                                        
+                                            <img class="object-cover rounded-md shadow-lg hover:scale-110 transition duration-300 ease-in-out" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/500x500/filters:strip_exif()/filters:no_upscale()/media/f6a84425-5181-4c48-a92c-2b64c00369a9.png" alt="Our Past Work for Peterstell Junk and Moving Company in Gwynn Oak, MD" loading="lazy" decoding="async"/>
+                                        
                                     
-                                
-                            </div>
+                                </div>
 
-                            <div class="space-y-1 text-lg font-medium leading-6">
-                                <p class="line-clamp-3"></p>
-                                <h3 class="text-primary"></h3>
-                            </div>
-                        
-                    </button>
-                </div>
-            </li>
+                                <div class="space-y-1 text-lg font-medium leading-6">
+                                    <p class="line-clamp-3"></p>
+                                    <h3 class="text-primary"></h3>
+                                </div>
+                            
+                        </button>
+                    </div>
+                </li>
+            
         
-            <li x-cloak x-data="{ shown: false }" x-intersect.full="shown = true" class=" block ">
-                <div x-show="shown" x-transition:enter="transition duration-1000" x-transition:enter-start="transform translate-y-20" x-transition:enter-end="transform translate-y-0">
-                    <button
-                        @click="activeImage = 13; galleryModalOpen = true"
-                        class="photo-tile block w-full h-full text-left rounded focus:outline-none focus-visible:ring focus:ring-0 focus:ring-offset-0"
-                    >
-                        
-                            <div class="aspect-w-3 aspect-h-2">
-                                
+            
+                <li x-cloak x-data="{ shown: false }" x-intersect.full="shown = true">
+                    <div x-show="shown" x-transition:enter="transition duration-1000" x-transition:enter-start="transform translate-y-20" x-transition:enter-end="transform translate-y-0">
+                        <button
+                            @click="activeImage = 13; galleryModalOpen = true"
+                            class="photo-tile block w-full h-full text-left rounded focus:outline-none focus-visible:ring focus:ring-0 focus:ring-offset-0"
+                        >
+                            
+                                <div class="aspect-w-3 aspect-h-2">
                                     
-                                        <img class="object-cover rounded-md shadow-lg hover:scale-110 transition duration-300 ease-in-out" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/500x500/filters:strip_exif()/filters:no_upscale()/media/1f839cd7-8fc7-4713-a724-48cb4c87306f.png" alt="Our Past Work for Peterstell Junk and Moving Company in Gwynn Oak, MD" loading="lazy" decoding="async"/>
+                                        
+                                            <img class="object-cover rounded-md shadow-lg hover:scale-110 transition duration-300 ease-in-out" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/500x500/filters:strip_exif()/filters:no_upscale()/media/1f839cd7-8fc7-4713-a724-48cb4c87306f.png" alt="Our Past Work for Peterstell Junk and Moving Company in Gwynn Oak, MD" loading="lazy" decoding="async"/>
+                                        
                                     
-                                
-                            </div>
+                                </div>
 
-                            <div class="space-y-1 text-lg font-medium leading-6">
-                                <p class="line-clamp-3"></p>
-                                <h3 class="text-primary"></h3>
-                            </div>
-                        
-                    </button>
-                </div>
-            </li>
+                                <div class="space-y-1 text-lg font-medium leading-6">
+                                    <p class="line-clamp-3"></p>
+                                    <h3 class="text-primary"></h3>
+                                </div>
+                            
+                        </button>
+                    </div>
+                </li>
+            
         
     </ul>
 

@@ -171,9 +171,10 @@
         contactChatOpen: false,
         active: 0,
         showAnnouncement: false,
-        customNavTransparent: false,
+        customNavTransparent:  false ,
         showMessage: false,
-        navbarHeight: ''
+        navbarHeight: '',
+        calculateTopMargin: true,
     }"
     x-effect="if (contactChatOpen === true) setTimeout(() => showMessage = true, 300)"
     :style="{ paddingTop: navbarHeight }"
