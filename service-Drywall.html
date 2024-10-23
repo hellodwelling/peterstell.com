@@ -524,6 +524,26 @@
 
                                 </div>
                             
+                                <div
+                                    class="relative"
+                                    x-trap.inert="desktopOpen"
+                                    x-data="{ desktopOpen: false }"
+                                    @keydown.escape.stop="desktopOpen = false"
+                                    @click.away="desktopOpen = false"
+                                >
+                                    
+                                        <a
+                                            href=" blog "
+                                            class="text-center  border-transparent   hover:border-gray-300 hover:text-gray-700  group pl-1.5 pr-1 py-3.5 inline-flex items-center px-1 transition  focus:outline-none focus:ring-0 focus:ring-offset-0 uppercase"
+                                            :class="{ 'text-gray-900': true }"
+                                        >
+                                            Blog
+                                        </a>
+                                    
+                                    
+
+                                </div>
+                            
                             
 
                         </div>
@@ -787,6 +807,18 @@
                                             class="text-gray-900 block p-4 text-base font-bold hover:bg-primary hover:text-white transition duration-75 uppercase"
                                         >
                                             Reviews
+                                        </a>
+                                    
+                                    
+                                </div>
+                            
+                                <div x-trap.inert="openMenu == 'navitem_7'">
+                                    
+                                        <a
+                                            href=" blog "
+                                            class="text-gray-900 block p-4 text-base font-bold hover:bg-primary hover:text-white transition duration-75 uppercase"
+                                        >
+                                            Blog
                                         </a>
                                     
                                     
