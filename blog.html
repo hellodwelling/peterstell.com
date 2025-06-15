@@ -136,9 +136,15 @@
                 
                 autocomplete = new google.maps.places.Autocomplete(address1Field, {
                     componentRestrictions: { country: ["us", "ca"] },
-                    fields: ["address_components", "geometry"],
+                    fields: ["formatted_address", "address_components", "geometry"],
                     types: ["address"],
                 });
+                autocomplete.addListener("place_changed", () => {
+                    const place = autocomplete.getPlace();
+                    if(place.formatted_address) {
+                        address1Field.value = place.formatted_address;
+                    }
+                })
                 address1Field.focus();
             } catch (error) {
                 console.error("Error: ", error.message)
@@ -1213,6 +1219,33 @@
 
         <div class="max-w-7xl mx-auto">
             <div class="relative inset-x-0 -top-64 skew-y-[4deg] px-6 gap-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+                
+                    <div class="w-full pb-2 border-2 border-primary bg-white">
+                        <div class="bg-primary py-4 flex flex-col gap-2 px-6">
+                            <a
+                                class="text-white text-left text-[28px] leading-9 xl:text-[32px] xl:leading-10  font-semibold"
+                                href="blog-transform-your-attic-peterstells-tips"
+                            >
+                                Transform Your Attic: Peterstell&#x27;s Tips for a Clutter-Free Storage Space
+                            </a>
+                            <span class="text-white opacity-70 text-sm font-bold uppercase">Jun 15, 2025</span>
+                        </div>
+                        <div class="py-4 px-6">
+                            <p class="text-sm xl:text-lg xl:leading-6 font-medium  text-left text-gray-700 h-[120px] truncate whitespace-normal">Attics are often the forgotten corners of our homes, spaces that eagerly collect dust and forgotten belongings over the years. Transforming your attic into an organized and clutter-free storage space…</p>
+                            <div class="text-left mt-4 text-secondary">
+                                <a
+                                    class="flex gap-[10px] items-center"
+                                    href="blog-transform-your-attic-peterstells-tips"
+                                >
+                                    <span class="text-secondary text-sm xl:text-base font-bold uppercase">Read full post</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path class="stroke-secondary" d="M12.6663 7.99967H3.33301M12.6663 7.99967L9.99967 10.6663M12.6663 7.99967L9.99967 5.33301" stroke="none" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
                 
                     <div class="w-full pb-2 border-2 border-primary bg-white">
                         <div class="bg-primary py-4 flex flex-col gap-2 px-6">
