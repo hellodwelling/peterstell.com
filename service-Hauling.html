@@ -3159,7 +3159,7 @@ For my 5th time they&#x27;re providing services for me I have never regretted an
                     </div>
                 </div>
 
-                <form id="contactModal" class="w-full relative overflow-y-auto" onsubmit="send_sms('Peterstell-Junk-and-Moving-Company', 'contact-modal', '(443) 851-3031')">
+                <form id="contactModal" class="w-full relative overflow-y-auto" onsubmit="send_sms('Peterstell-Junk-and-Moving-Company', 'contact-modal', deobfuscateNumber('(443) 851-3031'))">
                     <div class="h-full pb-24 overflow-y-auto">
                         <div class="flex flex-col justify-center gap-12 p-4 pb-0 xl:p-0 mx-auto">
 
@@ -4341,7 +4341,7 @@ For my 5th time they&#x27;re providing services for me I have never regretted an
     
 
     
-
+    
     <script>
         window.addEventListener("load", function() {
             setTimeout(function() {
@@ -4351,6 +4351,49 @@ For my 5th time they&#x27;re providing services for me I have never regretted an
             }, 5000);
         });
     </script>
+    
+    <script>
+  /**
+   * Phone number obfuscation to prevent bot scraping
+   * Decodes phone numbers from data attributes and initiates calls
+   */
+  function deobfuscateNumber(number) {
+    const isObfuscated = "False" === "True";
+    if (!isObfuscated) {
+      return number;
+    }
+    const binaryPD = atob(number);
+    const bytesPD = Uint8Array.from(binaryPD, (c) => c.charCodeAt(0));
+    const decodedPD = new TextDecoder("utf-8").decode(bytesPD);
+    const phone = decodedPD.slice(20);
+
+    return phone;
+  }
+
+  function initiateCall(element) {
+    const pref = "tel:";
+
+    try {
+      const pd = element.getAttribute("data-phone");
+      if (!pd) {
+        console.error("No phone number found on element to call");
+        return;
+      }
+      const phone = deobfuscateNumber(pd);
+
+      window.location.href = pref + phone;
+    } catch (error) {
+      console.error("Error:", error);
+
+      // Try calling the phone number
+      const fallbackPhone = element.getAttribute("data-phone");
+      if (fallbackPhone) {
+        window.location.href = pref + fallbackPhone.replace(/[^0-9]/g, "");
+      }
+    }
+  }
+</script>
+
 </body>
 
 </html>
