@@ -18,13 +18,6 @@
     </url>
 
     <url>
-        <loc>https://peterstell.com/service-Construction-Debris-Removal</loc>
-        <lastmod>2025-08-21</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
-    </url>
-
-    <url>
         <loc>https://peterstell.com/service-Hauling</loc>
         <lastmod>2025-08-21</lastmod>
         <changefreq>weekly</changefreq>
@@ -54,6 +47,13 @@
 
     <url>
         <loc>https://peterstell.com/service-Junk-Removal</loc>
+        <lastmod>2025-08-21</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <url>
+        <loc>https://peterstell.com/service-Construction-Debris-Removal</loc>
         <lastmod>2025-08-21</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
